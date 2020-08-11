@@ -1,0 +1,45 @@
+{
+  "name": "rainy-mouse",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Password manager",
+  "main": "dist/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron dist/main.js",
+    "postinstall": "electron-rebuild -f -w iohook",
+    "build": "tsc",
+    "dev": "nodemon --watch src/ --ext ts --exec 'tsc && electron dist/main.js'",
+    "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=app/assets/icons/mac/icon.icns --prune=true --out=release-builds",
+    "package-win": "electron-packager . --overwrite --platform=win32 --arch=ia32 --icon=app/assets/icons/win/icon.ico --prune=false --out=release-builds --version-string.CompanyName=AndoProd --version-string.FileDescription=RainyDay --version-string.ProductName=\"Rainy Mouse\"",
+    "package-linux": "electron-packager . --overwrite --platform=linux --arch=x64 --icon=app/assets/icons/png/1024x1024.png --prune=false --out=release-builds"
+  },
+  "author": "Ando",
+  "license": "ISC",
+  "devDependencies": {
+    "electron-packager": "^15.0.0",
+    "electron-rebuild": "^1.11.0",
+    "node-abi": "^2.18.0",
+    "nodemon": "^2.0.4"
+  },
+  "dependencies": {
+    "cross-env": "^7.0.2",
+    "electron": "^8.5.0",
+    "iohook": "^0.6.6"
+  },
+  "iohook": {
+    "targets": [
+      "node-72",
+      "electron-76"
+    ],
+    "platforms": [
+      "win32",
+      "darwin",
+      "linux"
+    ],
+    "arches": [
+      "x64",
+      "ia32"
+    ]
+  }
+}

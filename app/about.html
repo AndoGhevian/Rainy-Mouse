@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';">
+    <link rel="stylesheet" href="about.css">
+    <title>Rainy Mouse</title>
+</head>
+
+<body>
+    <main id="main" class="">
+        <h1 class="title">Written By <strong class="author">Ando Ghevian</strong></h1>
+        <p class="info">Droping waterballs from dark cloud on your mouse.</p>
+    </main>
+    <script>
+        const { ipcRenderer } = require('electron')
+
+        const transitionTime = 2000
+        const main = document.getElementById('main')
+
+        ipcRenderer.send('about:ready')
+        
+        ipcRenderer.on('show', () => {
+            main.className = 'show'
+            setTimeout(() => {
+                ipcRenderer.send('about:ready-show')
+            }, transitionTime)
+        })
+
+        ipcRenderer.on('hide', () => {
+            main.className = ''
+            setTimeout(() => {
+                ipcRenderer.send('about:ready-hide')
+            }, transitionTime)
+        })
+    </script>
+</body>
+
+</html>
